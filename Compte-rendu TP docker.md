@@ -54,7 +54,7 @@ System-nspawn:
 
 ---------------------------------
 
-Avec runc
+Avec runc:
 1)Installer runc: yum install runc
 2)Démarrer le service systemctl start docker
 3)Créer un repertoire roots: Dans le /home, mkdir fs_alpine
@@ -81,3 +81,17 @@ Basic docker run:
 1a)Changer le nom du conteneur: docker run --name "nom" -d -it alpine
 1b)Changer le hostname: docker run --rm -h "example.com" -it ubuntu bash
 2)Changer l'utilisateur qui lance un processus: docker run -it -d --user $(id -u)
+
+4)Monter le répertoire /home de l'hôte dans le conteneur: docker run -it -v $(pwd):/ouais alpine sh, mais je n'ai pas les droits sur le dossier que l'on vient de créer dans le conteneur
+NGINX:
+1a)Récupérer l'image nginx: docker pull nginx
+1b)Afficher la page d'accueil de niginx sur le port 8888: docker run --name nginx -d -p 8888:80 nginx
+
+----------------------------------------
+
+DOCKERFILE:
+1)Une base debian pour le Dockerfile: FROM debian:jessie
+2)Créer un dossier à la racine de notre conteneur:  COPY . /web
+3)Créer un répertoire de travail dans le Dockerfile: WORKDIR /web
+4)Déposer un fichier HTML sur le conteneur: on créé un fichier.html sur notre VM puis on le balance sur le conteneur via le Dockerfile, COPY . /web
+5)Pouvoir changer le sleep de base: ENTRYPOINT ["bin/sleep"] et CMD 60
