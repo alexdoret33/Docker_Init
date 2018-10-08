@@ -91,3 +91,29 @@ NGINX:
 3. Créer un répertoire de travail dans le Dockerfile: WORKDIR /web
 4. Déposer un fichier HTML sur le conteneur: on créé un fichier.html sur notre VM puis on le balance sur le conteneur via le Dockerfile, COPY . /web
 5. Pouvoir changer le sleep de base: ENTRYPOINT ["bin/sleep"] et CMD 60
+
+CURL :
+ 
+[centos@localhost ~]$ curl 172.17.0.3:8888
+<html>
+    <head>
+        <title>Test</title>
+    </head>
+ 
+    <body>
+        <h1>C'est un test</h1>
+        <p>Léo Brugère, Kélian Gardin, Alexandre Le Riche</p>
+    </body>
+</html>
+ 
+DOCKER FILE :
+ 
+[centos@localhost ~]$ cat test_docker/Dockerfile
+FROM debian:latest
+WORKDIR /web
+COPY /web /web
+EXPOSE 8888
+RUN adduser toto
+RUN apt-get update && apt-get upgrade && apt-get install python3 -y
+USER toto
+ENTRYPOINT ["/usr/bin/python3","-m","http.server","8888"]
