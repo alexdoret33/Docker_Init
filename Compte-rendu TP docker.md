@@ -95,6 +95,7 @@ NGINX:
 CURL :
  
 [centos@localhost ~]$ curl 172.17.0.3:8888
+
 <html>
     <head>
         <title>Test</title>
@@ -102,7 +103,7 @@ CURL :
  
     <body>
         <h1>C'est un test</h1>
-        <p>Léo Brugère, Kélian Gardin, Alexandre Le Riche</p>
+        <p>Léo Brugère, Kélian Gardin, Alexandre DORET</p>
     </body>
 </html>
  
